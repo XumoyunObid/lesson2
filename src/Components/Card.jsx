@@ -1,10 +1,45 @@
-import { Stack, Typography } from "@mui/material";
-import React from "react";
+import { IconButton, Stack, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { request } from "../config/request";
+import { toast } from "react-toastify";
 
 const Card = ({ id, name }) => {
+  const [data, setData] = useState([]);
+  const handleDelete = (id) => {
+    request
+      .delete(`/messages/${id}`)
+      .then((res) => {
+        toast.success("Message deleted successfully")
+        setData(res.data);
+      })
+      .finally(() => {
+        request.get("/messages").then((res) => {
+          setData(res.data);
+        });
+      });
+    // console.log(data);
+  };
+  useEffect(() => {
+    // console.log(data);
+  }, [data]);
+
   return (
-    <Stack>
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      border={"2px solid blue"}
+      mb="15px"
+      p="10px"
+    >
       <Typography variant="h5">{name}</Typography>
+      <IconButton
+        type="button"
+        variant="danger"
+        sx={{ width: "30px", height: "30px", color: "red" }}
+        onClick={() => handleDelete(id)}
+      >
+        x
+      </IconButton>
     </Stack>
   );
 };
