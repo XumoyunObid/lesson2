@@ -2,6 +2,8 @@ import { Stack, Typography } from "@mui/material";
 import Card from "../../Components/Card";
 import { useEffect, useState } from "react";
 import { request } from "../../config/request";
+import LogOutBtn from "../../Components/LogOutBtn";
+import { useParams } from "react-router-dom";
 
 const EditMessage = () => {
   const [data, setData] = useState([]);
@@ -11,15 +13,21 @@ const EditMessage = () => {
     });
   }, []);
   console.log(data);
+  const { id } = useParams();
+  const message = data.find((message) => message.id === parseInt(id));
   return (
     <div>
       <Stack>
-        <Typography variant="h4" mb="20px">
-          Edit Message
-        </Typography>
-        {data.map((obj) => (
-          <Card key={obj.id} {...obj} />
-        ))}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Typography variant="h4" mb="20px">
+            Edit Message
+          </Typography>
+          <LogOutBtn />
+        </Stack>
       </Stack>
     </div>
   );

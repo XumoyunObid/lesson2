@@ -13,4 +13,14 @@ request.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
+
+request.interceptors.response.use(
+  (response) => {
+    if(response.status == 401) {
+      return (window.location.pathname = "/")
+    }
+    return response
+  },
+  (error) => Promise.reject(error?.response?.data)
+);
 export { request };

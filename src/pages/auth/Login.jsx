@@ -26,7 +26,7 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
         toast.error("error");
-        localStorage.clear('user')
+        localStorage.clear("user");
       })
       .finally(() => {
         if (loadState("user")) {
@@ -65,7 +65,12 @@ const Login = () => {
                 {...register("password", { required: true })}
               />
             </div>
-            <Button type="submit" variant="contained">
+            <Button
+              style={{ marginBlock: "10px" }}
+              type="submit"
+              fullWidth
+              variant="contained"
+            >
               Submit
             </Button>
           </form>

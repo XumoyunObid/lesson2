@@ -2,6 +2,7 @@ import { IconButton, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { request } from "../config/request";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Card = ({ id, name }) => {
   const [data, setData] = useState([]);
@@ -9,7 +10,7 @@ const Card = ({ id, name }) => {
     request
       .delete(`/messages/${id}`)
       .then((res) => {
-        toast.success("Message deleted successfully")
+        toast.success("Message deleted successfully");
         setData(res.data);
       })
       .finally(() => {
@@ -31,7 +32,12 @@ const Card = ({ id, name }) => {
       mb="15px"
       p="10px"
     >
-      <Typography variant="h5">{name}</Typography>
+      <Link
+        style={{ textDecoration: "none", color: "black" }}
+        to={`edit/message/${id}`}
+      >
+        <Typography variant="h5">{name}</Typography>
+      </Link>
       <IconButton
         type="button"
         variant="danger"

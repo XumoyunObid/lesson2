@@ -1,15 +1,29 @@
 import React, { useEffect } from "react";
-import { Grid, Stack } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import { Link, Navigate, Outlet } from "react-router-dom";
 import { loadState } from "../lib/Storage";
 
 const MainLayout = () => {
   const user = loadState("user");
   if (!user) return <Navigate to="/" replace />;
+  const mainUser = loadState("user");
   return (
     <Grid sx={{ bgcolor: "#84919f", height: "100vh" }} container>
       <Grid p="20px" sx={{ bgcolor: "#0074E9", height: "100vh" }} item lg={3}>
         <Stack>
+          <Stack>
+            <Typography
+              variant="h4"
+              mb="20px"
+              border={"2px solid white"}
+              paddingInline="50px"
+              paddingBlock="15px"
+              color="white"
+              borderRadius="10px"
+            >
+              {mainUser.user.firstname} {mainUser.user.lastname}
+            </Typography>
+          </Stack>
           <Link
             style={{
               textDecoration: "none",

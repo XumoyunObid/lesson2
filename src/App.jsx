@@ -16,6 +16,7 @@ function App() {
         <Route path="/app" element={<MainLayout />}>
           <Route index element={<MessageList />} />
           <Route path="edit" element={<EditMessage />} />
+          <Route path="edit/message/:id" element={<EditMessage />} />
           <Route path="create" element={<CreateMessage />} />
         </Route>
       </Routes>
